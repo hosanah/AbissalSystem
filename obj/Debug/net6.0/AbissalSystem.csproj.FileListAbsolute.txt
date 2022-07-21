@@ -1,0 +1,6 @@
+F:\dev\AbissalSystem\obj\Debug\net6.0\AbissalSystem.csproj.AssemblyReference.cache
+F:\dev\AbissalSystem\obj\Debug\net6.0\AbissalSystem.GeneratedMSBuildEditorConfig.editorconfig
+F:\dev\AbissalSystem\obj\Debug\net6.0\AbissalSystem.AssemblyInfoInputs.cache
+F:\dev\AbissalSystem\obj\Debug\net6.0\AbissalSystem.AssemblyInfo.cs
+F:\dev\AbissalSystem\obj\Debug\net6.0\AbissalSystem.csproj.CoreCompileInputs.cache
+F:\dev\AbissalSystem\obj\Debug\net6.0\AbissalSystem.MvcApplicationPartsAssemblyInfo.cache
