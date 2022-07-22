@@ -1,6 +1,6 @@
 # AbissalSystem
 Repositório Criado para armazenar 
-<h2 align="left">Hi 👋! My name is Rafael Carvalho and I'm a Full-Stack Developer/ DBA SQL Server/ BI Developer, from Brazil</h2>
+<h2 align="left">Oi 👋! Me chamo Rafael Carvalho, sou um eterno aprendiz da arte de desenvolvemento de software</h2>
 
 ###
 
