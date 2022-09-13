@@ -55,7 +55,7 @@ namespace AbissalSystem.Controllers
         {
 
             if(!ModelState.IsValid)
-                return BadRequest(new ResultViewModel<Client>(ModelState.GetErros()));
+                return BadRequest(new ResultViewModel<Client>(ModelState.GetErrors()));
 
             try
             {
@@ -88,7 +88,7 @@ namespace AbissalSystem.Controllers
         public async Task<IActionResult> UpdateAsync([FromServices]AbissalSystemDbContext context, [FromBody] EditorClientViewModel model,[FromRoute] int id)
         {
             if(!ModelState.IsValid)
-                return BadRequest(new ResultViewModel<Client>(ModelState.GetErros()));
+                return BadRequest(new ResultViewModel<Client>(ModelState.GetErrors()));
                 
              try
             {

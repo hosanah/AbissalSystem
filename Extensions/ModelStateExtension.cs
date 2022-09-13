@@ -2,9 +2,9 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace AbissalSystem.Extensions
 {
-    public static class ModelStateExtensions
+   public static class ModelStateExtension
     {
-        public static List<string> GetErros(this ModelStateDictionary modelState)
+        public static List<string> GetErrors(this ModelStateDictionary modelState)
         {
             var result = new List<string>();
             foreach (var model in modelState.Values)
