@@ -7,28 +7,28 @@ namespace AbissalSystem.Data
     
     public class AbissalSystemDbContext : DbContext
     {
+         public AbissalSystemDbContext(DbContextOptions<AbissalSystemDbContext> options)
+            : base(options)
+        {
+        }
 
-        public DbSet<Client> Clients { get; set; }
-        
-        public DbSet<Employee> Employees { get; set; }
-        
-        public DbSet<Enterprise> Enterprises { get; set; }
-        
-        public DbSet<Product> Products { get; set; }
-        
-        public DbSet<User> Users { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }        
+        public DbSet<Empresa> Empresas { get; set; }        
+        public DbSet<Funcionario> Funcionarios { get; set; }
+        public DbSet<Lancamento> Lancamentos { get; set; }        
+        public DbSet<Produto> Produtos { get; set; }        
+        public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Regra> Regras { get; set; }
         
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlServer("Server=192.168.150.7,1433;Database=AbissalSystem;User ID=sa;Password=Dbamaster.");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new ClientMap());
-            modelBuilder.ApplyConfiguration(new EmployeeMap());
-            modelBuilder.ApplyConfiguration(new EnterpriseMap());
-            modelBuilder.ApplyConfiguration(new ProductMap());
-            modelBuilder.ApplyConfiguration(new UserMap());
+            modelBuilder.ApplyConfiguration(new ClienteMap());
+            modelBuilder.ApplyConfiguration(new EmpresaMap());
+            modelBuilder.ApplyConfiguration(new FuncionarioMap());
+            modelBuilder.ApplyConfiguration(new ProdutoMap());
+            modelBuilder.ApplyConfiguration(new UsuarioMap());
         }
     }
 

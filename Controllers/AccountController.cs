@@ -22,25 +22,25 @@ public class AccountController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(new ResultViewModel<string>(ModelState.GetErrors()));
 
-        var user = new User
+        var usuario = new Usuario
         {
-            Name = model.Name,
+            Nome = model.Nome,
             Email = model.Email
         };
 
-        user.PasswordHash = PasswordHasher.Hash(model.Password);
+        usuario.SenhaHash = PasswordHasher.Hash(model.Senha);
 
         try
         {
-            await context.Users.AddAsync(user);
+            await context.Usuario.AddAsync(usuario);
             await context.SaveChangesAsync();
 
-            var token = tokenService.GenerateToken(user);
+            var token = tokenService.GenerateToken(usuario);
 
             return Ok(new ResultViewModel<dynamic>(new
             {   
-                id = user.Id,
-                name = user.Name, 
+                id = usuario.Id,
+                name = usuario.Nome, 
                 token
             }));
         }
@@ -63,20 +63,20 @@ public class AccountController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(new ResultViewModel<string>(ModelState.GetErrors()));
 
-        var user = await context
-            .Users
+        var usuario = await context
+            .Usuario
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Email == model.Email);
 
-        if (user == null)
+        if (usuario == null)
             return StatusCode(401, new ResultViewModel<string>("Usuário ou senha inválidos"));
 
-        if (!PasswordHasher.Verify(user.PasswordHash, model.Password))
+        if (!PasswordHasher.Verify(usuario.SenhaHash, model.Senha))
             return StatusCode(401, new ResultViewModel<string>("Usuário ou senha inválidos"));
 
         try
         {
-            var token = tokenService.GenerateToken(user);
+            var token = tokenService.GenerateToken(usuario);
             return Ok(new ResultViewModel<string>(token, null));
         }
         catch

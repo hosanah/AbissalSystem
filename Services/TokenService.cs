@@ -8,7 +8,7 @@ namespace AbissalSystem.Services
 {
     public class TokenService
     {
-        public string GenerateToken(User user)
+        public string GenerateToken(Usuario usuario)
     {
         var tokenHanlder = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(Configuration.JwtKey);
@@ -16,9 +16,9 @@ namespace AbissalSystem.Services
         {
             Subject = new ClaimsIdentity(new Claim[]
             {
-                new(ClaimTypes.Name, user.Id.ToString()),
-                new(ClaimTypes.GivenName, user.Name),
-                new(ClaimTypes.Email, user.Email)
+                new(ClaimTypes.Name, usuario.Id.ToString()),
+                new(ClaimTypes.GivenName, usuario.Nome),
+                new(ClaimTypes.Email, usuario.Email)
             }),
             Expires = DateTime.UtcNow.AddHours(6),
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)

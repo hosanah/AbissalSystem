@@ -1,6 +1,6 @@
 namespace AbissalSystem.Models
 {
-    public enum DocumentType
+    public enum TipoDocumento
     {
         CPF = 0,
         Passport = 1,

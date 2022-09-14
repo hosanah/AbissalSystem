@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AbissalSystem.Data.Mappings
 {
-    public class ProductMap : IEntityTypeConfiguration<Product>
+    public class ProdutoMap : IEntityTypeConfiguration<Produto>
     {
-        public void Configure(EntityTypeBuilder<Product> builder)
+        public void Configure(EntityTypeBuilder<Produto> builder)
         {
             // Tabela
-            builder.ToTable("Product");
+            builder.ToTable("Produto");
 
             // Chave Primária
             builder.HasKey(x => x.Id);
@@ -20,29 +20,30 @@ namespace AbissalSystem.Data.Mappings
                 .UseIdentityColumn();
 
             // Propriedades
-            builder.Property(x => x.Name)
+            builder.Property(x => x.Nome)
                 .IsRequired()
-                .HasColumnName("Name")
+                .HasColumnName("Nome")
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(80);
 
-            builder.Property(x => x.Description)
+            builder.Property(x => x.Descricao)
                 .IsRequired()
-                .HasColumnName("Description")
+                .HasColumnName("Descricao")
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(80);
 
-            builder.Property(x => x.Price)
+            builder.Property(x => x.Preco)
                 .IsRequired()
-                .HasColumnName("Price")
+                .HasColumnName("Preco")
                 .HasColumnType("FLOAT")
                 .HasMaxLength(20);
 
-            //  builder
-            //     .HasOne(x => x.Enterprise)
-            //     .WithMany(x => x.Products)
-            //     .HasConstraintName("FK_Product_Enterprise")
-            //     .OnDelete(DeleteBehavior.Cascade);
+            // Relacionamentos
+            builder
+                .HasOne(x => x.Empresa)
+                .WithMany(x => x.Produtos)
+                .HasConstraintName("FK_Produtos_User")
+                .OnDelete(DeleteBehavior.Cascade);
           
         }
     }

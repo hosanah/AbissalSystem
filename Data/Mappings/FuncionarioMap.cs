@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AbissalSystem.Data.Mappings
 {
-    public class EmployeeMap : IEntityTypeConfiguration<Employee>
+    public class FuncionarioMap : IEntityTypeConfiguration<Funcionario>
     {
-        public void Configure(EntityTypeBuilder<Employee> builder)
+        public void Configure(EntityTypeBuilder<Funcionario> builder)
         {
             // Tabela
-            builder.ToTable("Employee");
+            builder.ToTable("Funcionario");
 
             // Chave Primária
             builder.HasKey(x => x.Id);
@@ -20,34 +20,34 @@ namespace AbissalSystem.Data.Mappings
                 .UseIdentityColumn();
 
             // Propriedades
-            builder.Property(x => x.FullName)
+            builder.Property(x => x.NomeCompleto)
                 .IsRequired()
-                .HasColumnName("Fullname")
+                .HasColumnName("NomeCompleto")
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(80);
             
             // Propriedades
-            builder.Property(x => x.Birthday)
+            builder.Property(x => x.DataAniversario)
                 .IsRequired()
-                .HasColumnName("Birthday")
+                .HasColumnName("DataAniversario")
                 .HasColumnType("SMALLDATETIME")
                 .HasMaxLength(60);
 
-            builder.Property(x => x.DocumentId)
+            /*builder.Property(x => x.)
                 .IsRequired()
                 .HasColumnName("Documentid")
-                .HasColumnType("INT");
+                .HasColumnType("INT");*/
 
-            builder.Property(x => x.DocumentNumber)
+            /*builder.Property(x => x.)
                 .IsRequired()
                 .HasColumnName("DocumentNumber")
                 .HasColumnType("NVARCHAR")
-                .HasMaxLength(80);
+                .HasMaxLength(80);*/
             
             // Propriedades
-            builder.Property(x => x.Salary)
+            builder.Property(x => x.Salario)
                 .IsRequired()
-                .HasColumnName("Salary")
+                .HasColumnName("Salario")
                 .HasColumnType("FLOAT")
                 .HasMaxLength(60);
             

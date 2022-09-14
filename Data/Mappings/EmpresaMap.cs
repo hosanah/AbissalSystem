@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AbissalSystem.Data.Mappings
 {
-    public class EnterpriseMap : IEntityTypeConfiguration<Enterprise>
+    public class EmpresaMap : IEntityTypeConfiguration<Empresa>
     {
-        public void Configure(EntityTypeBuilder<Enterprise> builder)
+        public void Configure(EntityTypeBuilder<Empresa> builder)
         {
             // Tabela
-            builder.ToTable("Enterprise");
+            builder.ToTable("Empresa");
 
             // Chave Primária
             builder.HasKey(x => x.Id);
@@ -20,19 +20,18 @@ namespace AbissalSystem.Data.Mappings
                 .UseIdentityColumn();
 
             // Propriedades
-            builder.Property(x => x.Name)
+            builder.Property(x => x.NomeFantasia)
                 .IsRequired()
-                .HasColumnName("Name")
+                .HasColumnName("NomeFantasia")
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(80);
 
-            builder.Property(x => x.CorporateName)
+            builder.Property(x => x.RazaoSocial)
                 .IsRequired()
-                .HasColumnName("CorporateName")
+                .HasColumnName("RazaoSocial")
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(80);
-
-                     
+                                     
         }
     }
 }

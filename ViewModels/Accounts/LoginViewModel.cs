@@ -9,5 +9,5 @@ public class LoginViewModel
     public string Email { get; set; }
     
     [Required(ErrorMessage = "Informe a senha")]
-    public string Password { get; set; }
+    public string Senha { get; set; }
 }

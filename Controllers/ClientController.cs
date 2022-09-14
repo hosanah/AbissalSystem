@@ -11,131 +11,131 @@ namespace AbissalSystem.Controllers
     [ApiController]
     public class ClientController : ControllerBase{
 
-        [HttpGet("v1/clients")]
+        [HttpGet("v1/clientes")]
         public async Task<IActionResult> GetAsyc([FromServices]AbissalSystemDbContext context)
         {
             try
             {
-                var clients = await context.Clients.ToListAsync();
-                return Ok(new ResultViewModel<List<Client>>(clients));
+                var clientes = await context.Clientes.ToListAsync();
+                return Ok(new ResultViewModel<List<Cliente>>(clientes));
             }
             catch (DbUpdateException ex){
-                return StatusCode(500, new ResultViewModel<List<Client>>("EXGCLI001 Não foi possível buscar todos os clients! Favor contate o suporte"));
+                return StatusCode(500, new ResultViewModel<List<Cliente>>("EXGCLI001 Não foi possível buscar todos os clientes! Favor contate o suporte"));
             }
             catch (Exception ex){
-                return StatusCode(500, new ResultViewModel<List<Client>>("EXGCLI002 Erro interno do servidor! Favor contate o suporte"));
+                return StatusCode(500, new ResultViewModel<List<Cliente>>("EXGCLI002 Erro interno do servidor! Favor contate o suporte"));
             }
             
         }
 
-        [HttpGet("v1/clients/{id:int}")]
+        [HttpGet("v1/clientes/{id:int}")]
         public async Task<IActionResult> GetByIdAsync([FromServices]AbissalSystemDbContext context, [FromRoute] int id)
         {
 
             try
             {
-                var client = await context.Clients.FirstOrDefaultAsync(x => x.Id == id);
+                var clientes = await context.Clientes.FirstOrDefaultAsync(x => x.Id == id);
 
-                if (client == null)
-                return NotFound(new ResultViewModel<Client>("EXGCLI005 Não foi encontrado nenhum cliente com o código fornecido! Favor contate o suporte"));
+                if (clientes == null)
+                return NotFound(new ResultViewModel<Cliente>("EXGCLI005 Não foi encontrado nenhum cliente com o código fornecido! Favor contate o suporte"));
 
-                return Ok(new ResultViewModel<Client>(client));
+                return Ok(new ResultViewModel<Cliente>(clientes));
             }
             catch (DbUpdateException ex){
-                return StatusCode(500, new ResultViewModel<Client>("EXGCLI003 Não foi possível buscar esse cliente! Favor contate o suporte"));
+                return StatusCode(500, new ResultViewModel<Cliente>("EXGCLI003 Não foi possível buscar esse cliente! Favor contate o suporte"));
             }
             catch (Exception ex){
-                return StatusCode(500, new ResultViewModel<Client>("EXGCLI004 Erro interno do servidor! Favor contate o suporte"));
+                return StatusCode(500, new ResultViewModel<Cliente>("EXGCLI004 Erro interno do servidor! Favor contate o suporte"));
             }
             
         }
 
-        [HttpPost("v1/clients")]
-        public async Task<IActionResult> CreateAsync([FromServices]AbissalSystemDbContext context, [FromBody] EditorClientViewModel model)
+        [HttpPost("v1/clientes")]
+        public async Task<IActionResult> CreateAsync([FromServices]AbissalSystemDbContext context, [FromBody] EditorClienteViewModel model)
         {
 
             if(!ModelState.IsValid)
-                return BadRequest(new ResultViewModel<Client>(ModelState.GetErrors()));
+                return BadRequest(new ResultViewModel<Cliente>(ModelState.GetErrors()));
 
             try
             {
-                var client = new Client()
+                var cliente = new Cliente()
                 {
                     Id = 0,
-                    FullName = model.FullName,
-                    Nickname = model.Nickname,
-                    Birthday = model.Birthday,
-                    CallPhone = model.CallPhone,
+                    NomeCompleto = model.NomeCompleto,
+                    Apelido = model.Apelido,
+                    DataAniversario = model.DataAniversario,
+                    NumeroCelular = model.NumeroCelular,
                     Email = model.Email
                 };
 
-                await context.Clients.AddAsync(client);
+                await context.Clientes.AddAsync(cliente);
                 await context.SaveChangesAsync();
 
-                return Created($"v1/clients/{client.Id}", new ResultViewModel<Client>(client));
+                return Created($"v1/clients/{cliente.Id}", new ResultViewModel<Cliente>(cliente));
 
             }
             catch (DbUpdateException ex){
-                return StatusCode(500, new ResultViewModel<Client>("EXCCLI001 Não foi possível incluir esse cliente! Favor contate o suporte"));
+                return StatusCode(500, new ResultViewModel<Cliente>("EXCCLI001 Não foi possível incluir esse cliente! Favor contate o suporte"));
             }
             catch (Exception ex){
-                return StatusCode(500, new ResultViewModel<Client>("EXCCLI002 Erro interno do servidor! Favor contate o suporte"));
+                return StatusCode(500, new ResultViewModel<Cliente>("EXCCLI002 Erro interno do servidor! Favor contate o suporte"));
             }
             
         }
 
-        [HttpPut("v1/clients/{id:int}")]
-        public async Task<IActionResult> UpdateAsync([FromServices]AbissalSystemDbContext context, [FromBody] EditorClientViewModel model,[FromRoute] int id)
+        [HttpPut("v1/clientes/{id:int}")]
+        public async Task<IActionResult> UpdateAsync([FromServices]AbissalSystemDbContext context, [FromBody] EditorClienteViewModel model,[FromRoute] int id)
         {
             if(!ModelState.IsValid)
-                return BadRequest(new ResultViewModel<Client>(ModelState.GetErrors()));
+                return BadRequest(new ResultViewModel<Cliente>(ModelState.GetErrors()));
                 
              try
             {
-                 var client = await context.Clients.FirstOrDefaultAsync(x => x.Id == id);
+                 var cliente = await context.Clientes.FirstOrDefaultAsync(x => x.Id == id);
             
-                if (client == null)
-                return NotFound(new ResultViewModel<Client>("EXUCLI003 Não foi encontrado nenhum cliente com o código fornecido! Favor contate o suporte"));
+                if (cliente == null)
+                return NotFound(new ResultViewModel<Cliente>("EXUCLI003 Não foi encontrado nenhum cliente com o código fornecido! Favor contate o suporte"));
 
-                client.Birthday = model.Birthday;
-                client.CallPhone = model.CallPhone;
-                client.FullName = model.FullName;
-                client.Nickname = model.Nickname;
+                cliente.DataAniversario = model.DataAniversario;
+                cliente.NumeroCelular = model.NumeroCelular;
+                cliente.NomeCompleto = model.NomeCompleto;
+                cliente.Apelido = model.Apelido;
 
-                context.Clients.Update(client);
+                context.Clientes.Update(cliente);
                 await context.SaveChangesAsync();
 
-                return Ok(new ResultViewModel<Client>(client));
+                return Ok(new ResultViewModel<Cliente>(cliente));
             }
             catch (DbUpdateException ex){
-                return StatusCode(500, new ResultViewModel<Client>("EXUCLI001 Não foi possível atualizar esse cliente! Favor contate o suporte"));
+                return StatusCode(500, new ResultViewModel<Cliente>("EXUCLI001 Não foi possível atualizar esse cliente! Favor contate o suporte"));
             }
             catch (Exception ex){
-                return StatusCode(500, new ResultViewModel<Client>("EXUCLI002 Erro interno do servidor! Favor contate o suporte"));
+                return StatusCode(500, new ResultViewModel<Cliente>("EXUCLI002 Erro interno do servidor! Favor contate o suporte"));
             }
             
         }
 
-        [HttpDelete("v1/clients/{id:int}")]
+        [HttpDelete("v1/clientes/{id:int}")]
         public async Task<IActionResult> DeleteAsync([FromServices]AbissalSystemDbContext context,[FromRoute] int id)
         {
             try
             {
-                var client = await context.Clients.FirstOrDefaultAsync(x => x.Id == id);
+                var cliente = await context.Clientes.FirstOrDefaultAsync(x => x.Id == id);
             
-                if (client == null)
-                return NotFound(new ResultViewModel<Client>("EXDCLI003 Não foi encontrado nenhum cliente com o código fornecido! Favor contate o suporte"));
+                if (cliente == null)
+                return NotFound(new ResultViewModel<Cliente>("EXDCLI003 Não foi encontrado nenhum cliente com o código fornecido! Favor contate o suporte"));
 
-                context.Clients.Remove(client);
+                context.Clientes.Remove(cliente);
                 await context.SaveChangesAsync();
 
-                return Ok(new ResultViewModel<Client>(client));
+                return Ok(new ResultViewModel<Cliente>(cliente));
             }
             catch (DbUpdateException ex){
-                return StatusCode(500, new ResultViewModel<Client>("EXDCLI001 Não foi possível incluir esse cliente! Favor contate o suporte"));
+                return StatusCode(500, new ResultViewModel<Cliente>("EXDCLI001 Não foi possível incluir esse cliente! Favor contate o suporte"));
             }
             catch (Exception ex){
-                return StatusCode(500, new ResultViewModel<Client>("EXDCLI002 Erro interno do servidor! Favor contate o suporte"));
+                return StatusCode(500, new ResultViewModel<Cliente>("EXDCLI002 Erro interno do servidor! Favor contate o suporte"));
             }
             
         }

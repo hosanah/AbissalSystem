@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AbissalSystem.Data.Mappings
 {
-    public class ClientMap : IEntityTypeConfiguration<Client>
+    public class ClienteMap : IEntityTypeConfiguration<Cliente>
     {
-        public void Configure(EntityTypeBuilder<Client> builder)
+        public void Configure(EntityTypeBuilder<Cliente> builder)
         {
             // Tabela
-            builder.ToTable("Client");
+            builder.ToTable("Cliente");
 
             // Chave Primária
             builder.HasKey(x => x.Id);
@@ -20,30 +20,30 @@ namespace AbissalSystem.Data.Mappings
                 .UseIdentityColumn();
 
             // Propriedades
-            builder.Property(x => x.FullName)
+            builder.Property(x => x.NomeCompleto)
                 .IsRequired()
-                .HasColumnName("Fullname")
+                .HasColumnName("NomeCompleto")
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(80);
 
              // Propriedades
-            builder.Property(x => x.Nickname)
+            builder.Property(x => x.Apelido)
                 .IsRequired()
-                .HasColumnName("Nickname")
+                .HasColumnName("Apelido")
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(80);
 
             // Propriedades
-            builder.Property(x => x.Birthday)
+            builder.Property(x => x.DataAniversario)
                 .IsRequired()
-                .HasColumnName("Birthday")
+                .HasColumnName("DataAniversario")
                 .HasColumnType("SMALLDATETIME")
                 .HasMaxLength(60);
 
              // Propriedades
-            builder.Property(x => x.CallPhone)
+            builder.Property(x => x.NumeroCelular)
                 .IsRequired()
-                .HasColumnName("Callphone")
+                .HasColumnName("NumeroCelular")
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(80);
 

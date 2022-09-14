@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace AbissalSystem.Data.Mappings
 {
-    public class UserMap : IEntityTypeConfiguration<User>
+    public class UsuarioMap : IEntityTypeConfiguration<Usuario>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<Usuario> builder)
         {
             // Tabela
-            builder.ToTable("User");
+            builder.ToTable("Usuario");
            
             // Chave Primária
             builder.HasKey(x => x.Id);
@@ -20,9 +20,9 @@ namespace AbissalSystem.Data.Mappings
                 .UseIdentityColumn();
 
             // Propriedades
-            builder.Property(x => x.Name)
+            builder.Property(x => x.Nome)
                 .IsRequired()
-                .HasColumnName("Name")
+                .HasColumnName("Nome")
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(80);
 
@@ -32,27 +32,27 @@ namespace AbissalSystem.Data.Mappings
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(40);
 
-            builder.Property(x => x.PasswordHash).IsRequired()
-                .HasColumnName("PasswordHash")
+            builder.Property(x => x.SenhaHash).IsRequired()
+                .HasColumnName("SenhaHash")
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(255);
 
              builder
-                .HasMany(x => x.Roles)
-                .WithMany(x => x.Users)
+                .HasMany(x => x.Regras)
+                .WithMany(x => x.Usuarios)
                 .UsingEntity<Dictionary<string, object>>(
                     "UserRole",
                     role => role
-                        .HasOne<Role>()
+                        .HasOne<Regra>()
                         .WithMany()
-                        .HasForeignKey("RoleId")
-                        .HasConstraintName("FK_UserRole_RoleId")
+                        .HasForeignKey("RegraId")
+                        .HasConstraintName("FK_UsuarioRegra_RegraId")
                         .OnDelete(DeleteBehavior.Cascade),
                     user => user
-                        .HasOne<User>()
+                        .HasOne<Usuario>()
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .HasConstraintName("FK_UserRole_UserId")
+                        .HasConstraintName("FK_UsuarioRegra_UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade));
 
         }
