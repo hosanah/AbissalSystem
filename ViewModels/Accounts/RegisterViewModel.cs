@@ -6,6 +6,8 @@ public class RegisterViewModel
 {
     [Required(ErrorMessage = "O nome é obrigatório")]
     public string Nome { get; set; }
+    [Required(ErrorMessage = "O usuário é obrigatório")]
+    public string NomeUsuario { get; set; }
     
     [Required(ErrorMessage = "O E-mail é obrigatório")]
     [EmailAddress(ErrorMessage = "O E-mail é inválido")]

@@ -31,6 +31,12 @@ namespace AbissalSystem.Data.Mappings
                 .HasColumnName("RazaoSocial")
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(80);
+            
+            builder.Property(x => x.CNPJ)
+                .IsRequired()
+                .HasColumnName("CNPJ")
+                .HasColumnType("NVARCHAR")
+                .HasMaxLength(80);
                                      
         }
     }

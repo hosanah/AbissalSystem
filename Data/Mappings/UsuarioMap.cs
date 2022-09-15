@@ -25,6 +25,13 @@ namespace AbissalSystem.Data.Mappings
                 .HasColumnName("Nome")
                 .HasColumnType("NVARCHAR")
                 .HasMaxLength(80);
+            
+            // Propriedades
+            builder.Property(x => x.NomeUsuario)
+                .IsRequired()
+                .HasColumnName("NomeUsuario")
+                .HasColumnType("NVARCHAR")
+                .HasMaxLength(20);
 
             builder.Property(x => x.Email)
                 .IsRequired()

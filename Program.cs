@@ -25,6 +25,10 @@ app.UseAuthorization();
 app.MapControllers();
 app.UseStaticFiles();
 app.UseResponseCompression();
+app.UseCors(x=>x
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
 
 
 app.Run();

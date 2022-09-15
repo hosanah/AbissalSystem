@@ -14,8 +14,7 @@ namespace AbissalSystem.Data
 
         public DbSet<Cliente> Clientes { get; set; }        
         public DbSet<Empresa> Empresas { get; set; }        
-        public DbSet<Funcionario> Funcionarios { get; set; }
-        public DbSet<Lancamento> Lancamentos { get; set; }        
+        public DbSet<Funcionario> Funcionarios { get; set; } 
         public DbSet<Produto> Produtos { get; set; }        
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Regra> Regras { get; set; }
